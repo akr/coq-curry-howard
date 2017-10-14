@@ -32,12 +32,12 @@ Goal forall (P : Prop), P -> P.
 Proof.
   auto.
 
-(** ここで、No more subgoals. と表示されて、証明できたことがわかります。
-auto で構築された証明は Show Proof. というコマンドで表示できます。*)
+(** ここで No more subgoals. と表示されて、証明できたことがわかります。
+構築された証明項は Show Proof というコマンドで表示できます。*)
   Show Proof.
 (** Show Proof とすると私の環境 (CoqIDE) では (fun P : Prop => id) と表示されます。
 id というのはなにかわからないので、
-CoqIDE のメニューの View -> Display all low-level contents を有効にして Show Proof.
+CoqIDE のメニューの View -> Display all low-level contents を有効にして Show Proof
 をやり直すと、
 (fun (P : Prop) (H : P) => H) と表示されます。
 実は今回は View -> Display notations を無効にするだけでも同じ効果があります。
@@ -73,8 +73,7 @@ Qed.
 この forall (P : Prop), P -> P という命題を、今度は auto を使わずに、
 move=> と exact を使って証明してみましょう。
 
-今回は Show Proof という証明の途中で証明項を表示するコマンドで
-各ステップごとに構築されていく項を見ていきます。
+今回は Show Proof で各ステップごとに構築されていく項を見ていきます。
 *)
 
 Goal forall (P : Prop), P -> P.
@@ -91,7 +90,7 @@ forall P : Prop, P -> P という型の
   Show Proof.
 (** move=> P により、前提に P : Prop が入り、証明すべき命題は P -> P に変化します。
 ここで Show Proof とすると、(fun P : Prop => ?Goal) と表示されます。
-つまり、move=> P は証明項が Prop型の値Pを受け取る関数抽象である、という指定です。
+つまり、move=> P は証明項が Prop型の値Pを受け取る関数抽象として構築せよ、という指示です。
 関数抽象の本体はまだわからないので、?Goal となっており、この部分の型は P -> P です。
 そのため、P -> P という型である ?Goal の部分をこれから構築しなければならない、
 という状態であることがわかります。
@@ -104,7 +103,7 @@ forall P : Prop, P -> P という型の
   Show Proof.
 (** move=> H により、前提に H : P が入り、証明すべき命題は P に変化します。
 Show Proof とすると、(fun (P : Prop) (H : P) => ?Goal) と表示されます。
-つまり、?Goal が（また）関数抽象である、という指定を行ったので、
+つまり、?Goal が（また）関数抽象として構築せよ、という指示を行ったので、
 証明項は関数抽象が2段ネストしたものとして (fun (P : Prop) (H : P) => ?Goal) という形に
 なり、関数抽象の本体の P という型である ?Goal の部分をこれから構築しなければならない、
 という状態であることが分かります。
@@ -114,7 +113,7 @@ Show Proof とすると、(fun (P : Prop) (H : P) => ?Goal) と表示されま�
 *)
   exact H.
   Show Proof.
-(** P という型の値は H が存在する（参照できる）ので、
+(** P という型の値としては H が存在する（参照できる）ので、
 それを証明項として与えれば証明は終わりです。
 exact H により H を証明項として直接与えると No more subgoals. と表示されて
 証明が終ったことがわかります。
@@ -210,19 +209,19 @@ Variable P : Prop.
 Goal P -> P.
 Proof.
   Show Proof.
-(* 先ほどのセクションの説明と同じく、P -> P の証明ですが、
+(** 先ほどのセクションの説明と同じく、P -> P の証明ですが、
 最初に Show Proof とすると、?Goal と表示され、
 証明項はまったくできていないことがわかります。
 *)
   move=> H.
   Show Proof.
-(* move=> H で、前提に移したところで
+(** move=> H で、前提に移したところで
 Show Proof とすると、(fun H : P => ?Goal) となり、
 引数Hを受け取るラムダ抽象が構築されることがわかります。 
 *)
   move: H.
   Show Proof.
-(* ここで move: H として、H を証明対象に戻したところで Show Proof とすると、
+(** ここで move: H として、H を証明対象に戻したところで Show Proof とすると、
 (fun H : P => ?Goal H) と表示されます。
 まずわかることは「戻す」というのは証明項が元に戻るわけではないことです。
 実際には ?Goal が ?Goal H に変化する、つまり、戻したものを引数とする関数呼び出しが構築され、
@@ -233,9 +232,9 @@ Show Proof とすると、(fun H : P => ?Goal) となり、
   move=> H.
   move: H.
   Show Proof.
-(* 意味もなく move=> H と move: H を繰り返してみると、証明項は
+(** 意味もなく move=> H と move: H を繰り返してみると、証明項は
 (fun H : P => (fun H0 : P => (fun H1 : P => ?Goal H1) H0) H)
-となります。ラムダ抽象と関数呼び出しが増えていることが分かります。
+となります。関数抽象と関数呼び出しが増えていることが分かります。
 Coq が表示する前提と証明する命題は変わりませんが、
 内部では証明項が（意味もなく）膨らんでいるわけです。
 move: の動作は確認できたので証明を終りましょう。
