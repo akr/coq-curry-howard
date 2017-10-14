@@ -15,3 +15,5 @@ clean :
 	  theories/*.d \
 	  theories/*.aux \
 	  theories/.*.aux
+
+.PHONY: all html clean
