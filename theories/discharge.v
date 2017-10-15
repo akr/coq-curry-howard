@@ -5,7 +5,7 @@ SSReflect で、move=> H は証明対象の命題から前提に移すもので�
 逆に、前提から証明対象の命題に移すのは move: H を使います。
 *)
 
-Section MoveBack.
+Section Discharge.
 
 Variable P : Prop.
 
@@ -45,4 +45,4 @@ move: の動作は確認できたので証明を終りましょう。
 *)
 Abort.
 
-End MoveBack.
+End Discharge.
