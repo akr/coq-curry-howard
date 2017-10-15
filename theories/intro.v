@@ -1,11 +1,9 @@
 From mathcomp Require Import all_ssreflect.
 
-(** ** move=> と exact
+(** ** move=>
 
-この forall (P : Prop), P -> P という命題を、今度は auto を使わずに、
+この forall (P : Prop), P -> P という命題を、今度は
 move=> と exact を使って証明してみましょう。
-
-今回は Show Proof で各ステップごとに構築されていく項を見ていきます。
 *)
 
 Goal forall (P : Prop), P -> P.

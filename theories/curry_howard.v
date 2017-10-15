@@ -25,7 +25,8 @@ Coq の証明はカリーハワード対応を利用し
 (** 
 
 - % auto % # <a href="auto.html">auto</a> #
-- % move=> と exact % # <a href="intro_exact.html">move=&gt; と exact</a> #
+- % exact % # <a href="exact.html">exact</a> #
+- % move=> % # <a href="intro.html">move=&gt;</a> #
 - % Section % # <a href="section.html">Section</a> #
 - % move: % # <a href="discharge.html">move:</a> #
 

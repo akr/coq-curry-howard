@@ -1,6 +1,7 @@
 theories/curry_howard.v
 theories/auto.v
-theories/intro_exact.v
+theories/exact.v
+theories/intro.v
 theories/section.v
 theories/discharge.v
 
