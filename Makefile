@@ -1,6 +1,3 @@
-all : Makefile.coq
-	$(MAKE) -f Makefile.coq
-
 html : Makefile.coq
 	$(MAKE) -f Makefile.coq html
 
