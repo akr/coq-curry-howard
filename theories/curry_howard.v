@@ -20,7 +20,7 @@ Coq の証明はカリーハワード対応を利用し
 
 *)
 
-(** 
+(**
 
 - % auto % # <a href="auto.html">auto</a> #
 - % exact % # <a href="exact.html">exact</a> #
@@ -28,4 +28,10 @@ Coq の証明はカリーハワード対応を利用し
 - % Section % # <a href="section.html">Section</a> #
 - % move: % # <a href="discharge.html">move:</a> #
 
+*)
+
+(**
+リポジトリ:
+% https://github.com/akr/coq-curry-howard %
+# <a href="https://github.com/akr/coq-curry-howard">https://github.com/akr/coq-curry-howard</a> #
 *)
