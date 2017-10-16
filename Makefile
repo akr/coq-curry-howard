@@ -1,4 +1,6 @@
-html : Makefile.coq
+all : Makefile.coq
+	mkdir -p docs
+	[ -d html ] || ln -s docs html
 	$(MAKE) -f Makefile.coq html
 
 Makefile.coq : _CoqProject
@@ -13,4 +15,4 @@ clean :
 	  theories/*.aux \
 	  theories/.*.aux
 
-.PHONY: all html clean
+.PHONY: all clean
