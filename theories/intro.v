@@ -9,7 +9,11 @@ move=> と exact を使って証明してみましょう。
 Goal forall (P : Prop), P -> P.
 Proof.
   Show Proof.
-(** ここでは証明を始めたばかりなので、Goal に与えた
+(**
+<<
+?Goal
+>>
+ここでは証明を始めたばかりなので、Goal に与えた
 forall P : Prop, P -> P という命題そのものを証明せよ、と Coq から要求されています。
 そこで Show Proof とすると ?Goal と表示されます。
 つまり、証明項はまったく構築されておらず、
@@ -18,7 +22,11 @@ forall P : Prop, P -> P という型の
 *)
   move=> P.
   Show Proof.
-(** move=> P により、前提に P : Prop が入り、証明すべき命題は P -> P に変化します。
+(**
+<<
+(fun P : Prop => ?Goal)
+>>
+move=> P により、前提に P : Prop が入り、証明すべき命題は P -> P に変化します。
 ここで Show Proof とすると、(fun P : Prop => ?Goal) と表示されます。
 つまり、move=> P は証明項を Prop型の値Pを受け取る関数抽象として構築せよ、という指示です。
 関数抽象の本体はまだわからないので、?Goal となっており、この部分の型は P -> P です。
@@ -31,7 +39,11 @@ forall P : Prop, P -> P という型の
 *)
   move=> H.
   Show Proof.
-(** move=> H により、前提に H : P が入り、証明すべき命題は P に変化します。
+(**
+<<
+(fun (P : Prop) (H : P) => ?Goal)
+>>
+move=> H により、前提に H : P が入り、証明すべき命題は P に変化します。
 Show Proof とすると、(fun (P : Prop) (H : P) => ?Goal) と表示されます。
 つまり、?Goal を（また）関数抽象として構築せよ、という指示を行ったので、
 証明項は関数抽象が2段ネストしたものとして (fun (P : Prop) (H : P) => ?Goal) という形に
@@ -43,7 +55,11 @@ Show Proof とすると、(fun (P : Prop) (H : P) => ?Goal) と表示されま�
 *)
   exact H.
   Show Proof.
-(** P という型の値としては H が存在する（参照できる）ので、
+(**
+<<
+(fun (P : Prop) (H : P) => H)
+>>
+P という型の値としては H が存在する（参照できる）ので、
 それを証明項として与えれば証明は終わりです。
 exact H により H を証明項として直接与えると No more subgoals. と表示されて
 証明が終ったことがわかります。

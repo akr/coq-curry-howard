@@ -21,23 +21,24 @@ Proof. auto. Qed.
 
 Print LemmaPP'.
 (**
-証明が終った後、でもセクションは終る前に、
-Print LemmaPP' とすると、以下のように表示されます。
 <<
 LemmaPP' = fun H : P => H
      : forall _ : P, P
 >>
+証明が終った後、でもセクションは終る前に、
+Print LemmaPP' とすると、上のように表示されます。
 つまり、LemmaPP' は P型の値Hを受け取ってHを返す関数です。
 *)
 
 End SectionExplanation.
 
 Print LemmaPP'.
-(** セクションを終ってから再度 Print LemmaPP' とすると、以下のように異なる表示になります。
+(**
 <<
 LemmaPP' = fun (P : Prop) (H : P) => H
      : forall (P : Prop) (_ : P), P
 >>
+セクションを終ってから再度 Print LemmaPP' とすると、上のように異なる表示になります。
 ここでは、命題Pを受け取り、P型の値Hを受け取り、Hを返す関数となっています。
 つまり、セクションの中での LemmaPP' の値の外側に、Pを受け取る関数抽象が追加されています。
 *)

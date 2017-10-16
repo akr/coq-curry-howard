@@ -13,11 +13,18 @@ Proof.
 (** ここで No more subgoals. と表示されて、証明できたことがわかります。
 構築された証明項は Show Proof というコマンドで表示できます。*)
   Show Proof.
+(**
+<<
+(fun P : Prop => id)
+>>
+*)
 (** Show Proof とすると私の環境 (CoqIDE) では (fun P : Prop => id) と表示されます。
 id というのはなにかわからないので、
 CoqIDE のメニューの View -> Display all low-level contents を有効にして Show Proof
-をやり直すと、
-(fun (P : Prop) (H : P) => H) と表示されます。
+をやり直すと、以下のように表示されます。
+<<
+(fun (P : Prop) (H : P) => H)
+>>
 実は今回は View -> Display notations を無効にするだけでも同じ効果があります。
 Display all low-level contents はやりすぎで見づらくなりすぎることも多いのですが、
 どれをトグルしたらいいかわからないときはこれを使ってみましょう。

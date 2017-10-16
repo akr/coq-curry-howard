@@ -1,5 +1,3 @@
-From mathcomp Require Import all_ssreflect.
-
 (** * カリーハワード対応とCoqのあいだ
 
 Coq の証明はカリーハワード対応を利用し
