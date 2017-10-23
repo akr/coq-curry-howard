@@ -18,14 +18,18 @@ Variable コマンドにより、P が Prop である、つまり何らかの命
 
 Lemma LemmaPP': P -> P.
 Proof. auto. Qed.
+(**
+何らかの命題 P が存在することを前提を用いて、
+P が成り立つならば P が成り立つことを証明し、その証明に LemmaPP' という名前をつけます。
+*)
 
 Print LemmaPP'.
 (**
 <<
-LemmaPP' = fun H : P => H
-     : forall _ : P, P
+LemmaPP' = id
+     : P -> P
 >>
-証明が終った後、でもセクションは終る前に、
+証明が終った後、セクションを終る前に、
 Print LemmaPP' とすると、上のように表示されます。
 つまり、LemmaPP' は P型の値Hを受け取ってHを返す関数です。
 *)
@@ -35,8 +39,8 @@ End SectionExplanation.
 Print LemmaPP'.
 (**
 <<
-LemmaPP' = fun (P : Prop) (H : P) => H
-     : forall (P : Prop) (_ : P), P
+LemmaPP' = fun P : Prop => id
+     : forall P : Prop, P -> P
 >>
 セクションを終ってから再度 Print LemmaPP' とすると、上のように異なる表示になります。
 ここでは、命題Pを受け取り、P型の値Hを受け取り、Hを返す関数となっています。

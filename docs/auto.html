@@ -64,6 +64,12 @@ CoqIDE のメニューの View -&gt; Display all low-level contents を有効に
 (fun (P : Prop) (H : P) =&gt; H)
 </pre>
 実は今回は View -&gt; Display notations を無効にするだけでも同じ効果があります。
+つまり、id というのは恒等関数 fun (H : P) =&gt; H のことで、
+表示するときに id となるように設定されています。
+ちなみに、この設定は SSReflect の ssrfun.v で行われています。
+
+<div class="paragraph"> </div>
+
 Display all low-level contents はやりすぎで見づらくなりすぎることも多いのですが、
 どれをトグルしたらいいかわからないときはこれを使ってみましょう。
 
@@ -104,6 +110,61 @@ Prop 型の値Pを受け取り、P型の値Hを受け取り、Hを返す関数�
 </div>
 <div class="code">
 <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+証明を終えるとき、Qed は証明項があらためて正しいかどうか
+（ちゃんと正しい型がつく項になっているかどうか）
+あらためて検査します。
+そのため、怪しげなユーザ拡張の tactic が変な証明項を生成しても、
+そのような証明はQedの段階で拒否されます。
+
+<div class="paragraph"> </div>
+
+ ところで、Qed としたときに Unnamed_thm is defined と表示されます。
+つまり、Unnamed_thm という定理が定義された、ということですが、
+もちろん、後で使いたい定理にこういう内容に関係ない名前をつけるのはよくありません。
+自分で定理に名前をつけるときには Goal ではなく Lemma や Theorem で証明を始めます。
+Lemmaというのは補題で、Theoremというのは定理ですが、
+機能的な違いはとくにありません。ここでは常に Lemma をつかうことにします。
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="LemmaPP"><span class="id" title="lemma">LemmaPP</span></a>: <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>), <a class="idref" href="auto.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="auto.html#P"><span class="id" title="variable">P</span></a>.<br/>
+</div>
+
+<div class="doc">
+証明しようとしているのは上と同じく forall (P : Prop), P -&gt; P という命題であり、
+これはその証明を LemmaPP という名前をつけよう、という指定です。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="auto.html#LemmaPP"><span class="id" title="lemma">LemmaPP</span></a>.<br/>
+</div>
+
+<div class="doc">
+証明が終った後、Print LemmaPP とすると以下のように表示されます。
+<pre>
+LemmaPP = fun P : Prop =&gt; id
+     : forall P : Prop, P -&gt; P
+</pre>
+これは、LemmaPP の値は fun P : Prop =&gt; id という値であり、
+その型は forall P : Prop, P -&gt; P である、という意味です。
+プログラムの世界で解釈すれば、まさに LemmaPP という定数は
+構築した証明項を値として定義されている、
+というわけです。
+
+</div>
+<div class="code">
+
+<br/>
 </div>
 </div>
 

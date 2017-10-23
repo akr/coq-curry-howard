@@ -63,9 +63,9 @@ SSReflect で、move=&gt; H は証明対象の命題から前提に移すもの�
 <pre>
 (fun H : P =&gt; ?Goal)
 </pre>
-move=&gt; H で、前提に移したところで
+move=&gt; H で、H : P を前提に移したところで
 Show Proof とすると、(fun H : P =&gt; ?Goal) となり、
-引数Hを受け取るラムダ抽象が構築されることがわかります。 
+引数Hを受け取る関数抽象が構築されることがわかります。
 
 </div>
 <div class="code">
@@ -75,9 +75,11 @@ Show Proof とすると、(fun H : P =&gt; ?Goal) となり、
 
 <div class="doc">
 <pre>
-(fun H : P =&gt; ?Goal H)
+[eta ?Goal]
 </pre>
-ここで move: H として、H を証明対象に戻したところで Show Proof とすると、
+ここで move: H として、H : P を証明対象に戻したところで Show Proof とすると、
+<span class="inlinecode"><span class="id" title="var">eta</span></span> <span class="inlinecode">?<span class="id" title="keyword">Goal</span></span> と表示されます。
+Display notations を無効にして Show Proof をやりなおすと、
 (fun H : P =&gt; ?Goal H) と表示されます。
 まずわかることは「戻す」というのは証明項が元に戻るわけではないことです。
 実際には ?Goal が ?Goal H に変化する、つまり、戻したものを引数とする関数呼び出しが構築され、
@@ -101,6 +103,156 @@ Show Proof とすると、(fun H : P =&gt; ?Goal) となり、
 となります。関数抽象と関数呼び出しが増えていることが分かります。
 Coq が表示する前提と証明する命題は変わりませんが、
 内部では証明項が（意味もなく）膨らんでいるわけです。
+
+<div class="paragraph"> </div>
+
+ここで、?Goal の外側には H, H0, H1 の束縛がありますが、
+前提にこれらは表示されていません。
+これは、Coq がすべての束縛を前提に表示するわけではなく、
+move: は指定した前提を前提から表示しないようにするためです。
+
+<div class="paragraph"> </div>
+
+指定した前提を表示したままにするには、カッコでくくります。
+
+<div class="paragraph"> </div>
+
+その動作を確認する前に、証明を最初からやり直すため、Restart コマンドを使います。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+?Goal
+</pre>
+Restart の後で Show Proof とすると、?Goal とだけ表示され、
+今まで構築した証明項が消えていることが確認できます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (<span class="id" title="var">H</span>).<br/>
+</div>
+
+<div class="doc">
+ここでは、H が前提に表示されたままになっています。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">H</span>.<br/>
+</div>
+
+<div class="doc">
+ここで、さらに move=&gt; H としようとすると、失敗します。
+(Fail というのはコマンドを実行して失敗することを確認するコマンドです)
+これは証明すべき命題 P -&gt; P の左側を前提に H という名前で移す指示ですが、
+H という名前はすでに前提に存在するので、Error: H is already used. というエラーになります。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">Ha</span>.<br/>
+</div>
+
+<div class="doc">
+ここで Ha という別の名前を使えば問題なく成功します。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (<span class="id" title="var">Ha</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">Hb</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (<span class="id" title="var">Hb</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">Hc</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (<span class="id" title="var">Hc</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+[eta [eta [eta [eta ?Goal]]]]
+</pre>
+eta で表示されると中身がよくわからないので Display notations を無効にすると、
+以下のようになります。
+<pre>
+(fun H : P =&gt;
+ (fun Ha : P =&gt; (fun Hb : P =&gt; (fun Hc : P =&gt; ?Goal Hc) Hb) Ha) H)
+</pre>
+このように move: と move=&gt; を数回くり返して Show Proof とすると、
+move: に指定した Ha, Hb, Hc を引数とする関数適用が構築されていることがわかります。
+
+<div class="paragraph"> </div>
+
+ところで、move: が関数適用を構築し、指定されたものを引数にするのであれば、
+べつに引数にするのはべつにすでにある前提でなければならない理由はないことに
+気がついたでしょうか。
+実際、move: ではそのような関数適用を構築することも可能です。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: 0.<br/>
+</div>
+
+<div class="doc">
+<pre>
+nat -&gt; P -&gt; P
+</pre>
+このように、move: 0 として 0 を指定すると、証明すべき命題は
+P -&gt; P から nat -&gt; P -&gt; P に変化します。
+指定した 0 はどこにいってしまったのかというと、Show Proof でわかります。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(?Goal 0)
+</pre>
+つまり、証明項は関数適用として構築され、その引数は move: に指定した 0 になっています。
+?Goal の型はまず 0 を引数としてとるので、nat の値を引数に関数型となります。
+そのため、証明すべき命題は nat -&gt; ... となっているのです。
+
+<div class="paragraph"> </div>
+
+このように前提ではないものを move: に指定したときは、前提から取り除きようがありませんから
+前提は変わりません。
+
+<div class="paragraph"> </div>
+
+move: に複雑な式を指定する場合はかっこでくくります。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (1 <span class="id" title="notation">+</span> 2).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(?Goal (1 + 2))
+</pre>
+
+<div class="paragraph"> </div>
+
+ここでは 1 + 2 を move: に与えていて、証明項に構築された関数適用では、
+引数が 1 + 2 になっていることがわかります。
+
+<div class="paragraph"> </div>
+
+move: にかっこでくくったものを指定した場合、move: はそれを前提から取り除きません。
+複雑な式（外側で束縛された変数以外の何か）であればそもそも前提にないので取り除けませんし、
+前提のいずれか（外側で束縛された変数）であっても取り除きません。
+むしろ、かっこでくくらずに前提を指定したときのみ、前提に表示しないように取り除く、
+と考えるのが適切でしょう。
+
+<div class="paragraph"> </div>
+
 move: の動作は確認できたので証明を終りましょう。
 ここでは Abort で証明を中断する、つまり証明項を完成させずに終ることにします。
 

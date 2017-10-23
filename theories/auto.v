@@ -26,6 +26,10 @@ CoqIDE のメニューの View -> Display all low-level contents を有効にし
 (fun (P : Prop) (H : P) => H)
 >>
 実は今回は View -> Display notations を無効にするだけでも同じ効果があります。
+つまり、id というのは恒等関数 fun (H : P) => H のことで、
+表示するときに id となるように設定されています。
+ちなみに、この設定は SSReflect の ssrfun.v で行われています。
+
 Display all low-level contents はやりすぎで見づらくなりすぎることも多いのですが、
 どれをトグルしたらいいかわからないときはこれを使ってみましょう。
 
@@ -54,3 +58,39 @@ Prop 型の値Pを受け取り、P型の値Hを受け取り、Hを返す関数�
 
 *)
 Qed.
+
+(** 証明を終えるとき、Qed は証明項があらためて正しいかどうか
+（ちゃんと正しい型がつく項になっているかどうか）
+あらためて検査します。
+そのため、怪しげなユーザ拡張の tactic が変な証明項を生成しても、
+そのような証明はQedの段階で拒否されます。
+*)
+
+(** ところで、Qed としたときに Unnamed_thm is defined と表示されます。
+つまり、Unnamed_thm という定理が定義された、ということですが、
+もちろん、後で使いたい定理にこういう内容に関係ない名前をつけるのはよくありません。
+自分で定理に名前をつけるときには Goal ではなく Lemma や Theorem で証明を始めます。
+Lemmaというのは補題で、Theoremというのは定理ですが、
+機能的な違いはとくにありません。ここでは常に Lemma をつかうことにします。
+*)
+
+Lemma LemmaPP: forall (P : Prop), P -> P.
+(** 証明しようとしているのは上と同じく forall (P : Prop), P -> P という命題であり、
+これはその証明を LemmaPP という名前をつけよう、という指定です。
+*)
+Proof. auto. Qed.
+
+Print LemmaPP.
+(** 証明が終った後、Print LemmaPP とすると以下のように表示されます。
+<<
+LemmaPP = fun P : Prop => id
+     : forall P : Prop, P -> P
+>>
+これは、LemmaPP の値は fun P : Prop => id という値であり、
+その型は forall P : Prop, P -> P である、という意味です。
+プログラムの世界で解釈すれば、まさに LemmaPP という定数は
+構築した証明項を値として定義されている、
+というわけです。
+*)
+
+

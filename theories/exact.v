@@ -26,12 +26,13 @@ forall P : Prop, P -> P という型の
   Show Proof.
 (**
 <<
-(fun (P : Prop) (H : P) => H)
+(fun P : Prop => id)
 >>
 exact では ?Goal に埋めるべき証明項を直接指定することができます。
 ここでは、auto で作られたのと同じ、(fun (P : Prop) (H : P) => H) を指定しています。
 これにより、No more subgoals. と表示され、証明が終わったことがわかります。
-その後で Show Proof とすると、(fun (P : Prop) (H : P) => H) と表示され、
+その後で Show Proof とすると、(fun P : Prop => id) と表示され、
 exact で指定した証明項が構築されていることがわかります。
+(id と表示されるのは、Notation を使って表示するというデフォルト設定だからです)
 *)
 Qed.

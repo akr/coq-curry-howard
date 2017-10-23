@@ -65,13 +65,14 @@ forall P : Prop, P -&gt; P という型の
 
 <div class="doc">
 <pre>
-(fun (P : Prop) (H : P) =&gt; H)
+(fun P : Prop =&gt; id)
 </pre>
 exact では ?Goal に埋めるべき証明項を直接指定することができます。
 ここでは、auto で作られたのと同じ、(fun (P : Prop) (H : P) =&gt; H) を指定しています。
 これにより、No more subgoals. と表示され、証明が終わったことがわかります。
-その後で Show Proof とすると、(fun (P : Prop) (H : P) =&gt; H) と表示され、
+その後で Show Proof とすると、(fun P : Prop =&gt; id) と表示され、
 exact で指定した証明項が構築されていることがわかります。
+(id と表示されるのは、Notation を使って表示するというデフォルト設定だからです)
 
 </div>
 <div class="code">
