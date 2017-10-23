@@ -3,6 +3,9 @@ From mathcomp Require Import all_ssreflect.
 (** ** move:
 SSReflect で、move=> H は証明対象の命題から前提に移すものですが、
 逆に、前提から証明対象の命題に移すのは move: H を使います。
+
+正確には、move: というのは move というなにもしない tactic に : という tactical をつけたもので、
+他の tactic にも : をつけられるのですが、その点については気にしないことにします。
 *)
 
 Section Discharge.

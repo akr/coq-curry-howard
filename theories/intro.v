@@ -4,6 +4,9 @@ From mathcomp Require Import all_ssreflect.
 
 この forall (P : Prop), P -> P という命題を、今度は
 move=> と exact を使って証明してみましょう。
+
+正確には、move=> というのは move というなにもしない tactic に => という tactical をつけたもので、
+他の tactic にも => をつけられるのですが、その点については気にしないことにします。
 *)
 
 Goal forall (P : Prop), P -> P.
