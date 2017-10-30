@@ -68,7 +68,7 @@ P と P -&gt; Q が成り立っていたら Q が成り立つという三段論�
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Goal</span> <a class="idref" href="apply.html#Apply.Q"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a name="modus_ponens"><span class="id" title="lemma">modus_ponens</span></a> : <a class="idref" href="apply.html#Apply.Q"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
@@ -121,6 +121,47 @@ P 型の値として Hp があるので、それを exact Hp として証明項�
 
 <br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="apply.html#Apply"><span class="id" title="section">Apply</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="apply.html#modus_ponens"><span class="id" title="lemma">modus_ponens</span></a>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+modus_ponens =
+fun (P Q : Prop) (Hp : P) =&gt; @^~ Hp
+     : forall P Q : Prop, P -&gt; (P -&gt; Q) -&gt; Q
+</pre>
+
+<div class="paragraph"> </div>
+
+section を終ってから三段論法の証明項を Print で表示すると上のようになりますが、
+@^~ というのがよくわかりません。
+（これはじつは SSReflect の ssrfun.v で Notation "@^~ x" := (fun f =&gt; f x) として
+定義されている記法です。）
+
+<div class="paragraph"> </div>
+
+そこで、Display notations を無効にして表示しなおすと、下のようになります。
+
+<div class="paragraph"> </div>
+
+<pre>
+modus_ponens =
+fun (P Q : Prop) (Hp : P) (Hpq : forall _ : P, Q) =&gt; Hpq Hp
+     : forall (P Q : Prop) (_ : P) (_ : forall _ : P, Q), Q
+</pre>
+
+<div class="paragraph"> </div>
+
+Hpq Hp という項に、P, Q, Hp, Hpq という引数の関数抽象が外側にくくられた
+証明項になっていることがわかります。
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
 </div>
 </div>
 
