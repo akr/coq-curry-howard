@@ -5,4 +5,4 @@ theories/intro.v
 theories/section.v
 theories/discharge.v
 theories/apply.v
-
+theories/rewrite.v

@@ -28,6 +28,7 @@ Coq はカリーハワード対応を利用して
 - % Section % # <a href="section.html">Section</a> #
 - % move: % # <a href="discharge.html">move:</a> #
 - % apply % # <a href="apply.html">apply</a> #
+- % rewrite % # <a href="rewrite.html">rewrite</a> #
 
 *)
 
