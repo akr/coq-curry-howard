@@ -35,6 +35,10 @@ Coq はカリーハワード対応を利用して
 *)
 
 (**
+URL:
+% https://akr.github.io/coq-curry-howard/curry_howard.html %
+# <a href="https://akr.github.io/coq-curry-howard/curry_howard.html">https://akr.github.io/coq-curry-howard/curry_howard.html</a> #
+
 リポジトリ:
 % https://github.com/akr/coq-curry-howard %
 # <a href="https://github.com/akr/coq-curry-howard">https://github.com/akr/coq-curry-howard</a> #
