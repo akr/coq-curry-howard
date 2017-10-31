@@ -7,3 +7,4 @@ theories/discharge.v
 theories/apply.v
 theories/reflexivity.v
 theories/rewrite.v
+theories/case.v

@@ -4,6 +4,9 @@ From mathcomp Require Import all_ssreflect.
 
 reflexivity は X = X という命題を証明する tactic です。
 
+SSReflect ではふつう by [] などで済ますのであまり使いませんが、
+等式の扱いの説明をするのに都合がいいので説明しましょう。
+
 *)
 
 Goal 0 = 0.
