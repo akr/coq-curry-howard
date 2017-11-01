@@ -30,7 +30,7 @@ Coq はカリーハワード対応を利用して
 - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
 - % rewrite % # <a href="rewrite.html">rewrite</a> #
 - % destruct % # <a href="destruct.html">destruct</a> #
-  % case % # <a href="case.html">case</a> #
+  % case % # <a href="ssr_case.html">case</a> #
 
 *)
 
