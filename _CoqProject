@@ -4,7 +4,7 @@ theories/exact.v
 theories/intro.v
 theories/ssr_intro.v
 theories/section.v
-theories/discharge.v
+theories/ssr_discharge.v
 theories/apply.v
 theories/reflexivity.v
 theories/rewrite.v
