@@ -7,6 +7,6 @@ theories/section.v
 theories/ssr_discharge.v
 theories/apply.v
 theories/reflexivity.v
-theories/rewrite.v
+theories/ssr_rewrite.v
 theories/destruct.v
 theories/ssr_case.v

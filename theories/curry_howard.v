@@ -23,14 +23,14 @@ Coq はカリーハワード対応を利用して
 - % auto % # <a href="auto.html">auto</a> #
 - % exact % # <a href="exact.html">exact</a> #
 - % intro % # <a href="intro.html">intro</a> #
-  % move=> % # <a href="ssr_intro.html">move=&gt;</a> #
+  % move=> (SSReflect) % # <a href="ssr_intro.html">move=&gt; (SSReflect)</a> #
 - % Section % # <a href="section.html">Section</a> #
-- % move: % # <a href="ssr_discharge.html">move:</a> #
+- % move: (SSReflect) % # <a href="ssr_discharge.html">move: (SSReflect)</a> #
 - % apply % # <a href="apply.html">apply</a> #
 - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
-- % rewrite % # <a href="rewrite.html">rewrite</a> #
+- % rewrite (SSReflect) % # <a href="ssr_rewrite.html">rewrite (SSReflect)</a> #
 - % destruct % # <a href="destruct.html">destruct</a> #
-  % case % # <a href="ssr_case.html">case</a> #
+  % case (SSReflect) % # <a href="ssr_case.html">case (SSReflect)</a> #
 
 *)
 
