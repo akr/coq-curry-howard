@@ -32,7 +32,7 @@ Coq はカリーハワード対応を利用して
   % move:% # <a href="ssr_discharge.html">move:</a> #
 - % apply % # <a href="apply.html">apply</a> #
 - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
-- rewrite
+- % rewrite % # <a href="rewrite.html">rewrite</a> #
   SSReflect:
   % rewrite % # <a href="ssr_rewrite.html">rewrite</a> #
 - % destruct % # <a href="destruct.html">destruct</a> #

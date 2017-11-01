@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>rewrite</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library rewrite</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab10"></a><h2 class="section">rewrite</h2>
+
+
+<div class="paragraph"> </div>
+
+rewrite は X = Y という定理を利用して、証明の中で
+X を Y に書き換える tactic です。
+
+<div class="paragraph"> </div>
+
+X = Y は eq X Y の notation なので、ここからは = のことを eq と呼ぶことにします。
+(じつは、eq は省略されている引数があって 3引数だったりしますが、ここでは気にしないことに
+しましょう。実際の定義を見たいのであれば Coq の theories/Init/Logic.v を覗いてください。)
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Section</span> <span class="id" title="keyword">Rewrite</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variable</span> <a name="Rewrite.a"><span class="id" title="variable">a</span></a> <a name="Rewrite.b"><span class="id" title="variable">b</span></a> <a name="Rewrite.c"><span class="id" title="variable">c</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+まず、簡単な例として、a * (b + c) を a * (c + b) に書き換えてみましょう。
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">(</span></a><a class="idref" href="rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">(</span></a><a class="idref" href="rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+1 subgoal
+a, b, c : nat
+______________________________________(1/1)
+a * (b + c) = a * (c + b)
+</pre>
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+?Goal
+</pre>
+
+<div class="paragraph"> </div>
+
+証明がはじまったばかりの段階では、証明項全体をこれから構築していく段階なので、
+?Goal とだけ表示されます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.PeanoNat.html#Nat.add_comm"><span class="id" title="lemma">Nat.add_comm</span></a>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+1 subgoal
+a, b, c : nat
+______________________________________(1/1)
+a * (c + b) = a * (c + b)
+</pre>
+Coq では、自然数の加算の交換律は Nat.add_comm という補題として用意されているので、
+rewrite Nat.add_comm で書き換えを行えます。
+
+<div class="paragraph"> </div>
+
+このケースでは、rewrite は b + c という部分を書き換えの対象として発見し、
+これを c + b に書き換えます。
+
+<div class="paragraph"> </div>
+
+書き換えた結果、証明すべき命題は a * (c + b) = a * (c + b) に変化します。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(eq_ind_r (fun n : nat =&gt; a * n = a * (c + b)) ?Goal (Nat.add_comm b c))
+</pre>
+
+<div class="paragraph"> </div>
+
+書き変えを行った後、Show Proof で証明項を表示すると、上のようになります。
+
+<div class="paragraph"> </div>
+
+この証明項の内部では eq_ind_r と Nat.add_comm が使われています。
+Nat.add_comm は rewrite の引数に指定したのでそれが使われているわけですが、
+eq_ind_r は rewrite が内部的に使った定理です。
+
+<div class="paragraph"> </div>
+
+eq_ind_r がどんな定理なのか About で表示してみましょう。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq_ind_r"><span class="id" title="definition">eq_ind_r</span></a>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+eq_ind_r :
+forall (A : Type) (x : A) (P : A -&gt; Prop), P x -&gt; forall y : A, y = x -&gt; P y
+Arguments A, x, y are implicit
+</pre>
+
+<div class="paragraph"> </div>
+
+Arguments A, x, y are implicit というのは A, x, y は省略されるという設定を示しています。
+
+<div class="paragraph"> </div>
+
+eq_ind_r の定義を確実に確認するため、Display notations を無効にして、
+さらに Display implicit arguments を有効にして About eq_ind_r を
+やりなおすと、以下のように表示されます。
+
+<div class="paragraph"> </div>
+
+<pre>
+eq_ind_r :
+forall (A : Type) (x : A) (P : forall _ : A, Prop) (_ : P x) (y : A)
+  (_ : @eq A y x), P y
+</pre>
+
+<div class="paragraph"> </div>
+
+P x -&gt; というのが P x という型の無名引数であるとか、y = x が @eq A y x であるとか、
+そういうことがわかります。
+
+<div class="paragraph"> </div>
+
+@eq の @ は eq で引数の省略を行わないという指定です。
+通常 eq では第1引数が省略されるのですが、ここでは第1引数の A が表示されています。
+(@ はユーザが項を指定するときに、通常は省略される引数を明示的に指定する時も使えます。)
+
+<div class="paragraph"> </div>
+
+Display implicit arguments の効果は証明項の表示でも有効です。
+有効にした状態で Show Proof とすると、以下のように表示されます。
+
+<div class="paragraph"> </div>
+
+<pre>
+(@eq_ind_r nat (c + b) (fun n : nat =&gt; a * n = a * (c + b)) ?Goal (b + c)
+   (Nat.add_comm b c))
+</pre>
+
+<div class="paragraph"> </div>
+
+ここでは eq_ind_r のかわりに @eq_ind_r と @ がついて表示され、
+省略を行わない形式であることを示しています。
+
+<div class="paragraph"> </div>
+
+eq_ind_r の引数は以下のように与えられています。
+<ul class="doclist">
+<li> A は nat
+
+</li>
+<li> x は c + b
+
+</li>
+<li> P は fun n : nat =&gt; a * n = a * (c + b)
+
+</li>
+<li> P x という型の無名引数は ?Goal
+
+</li>
+<li> y は b + c
+
+</li>
+<li> @eq A y x という型 (y = x という型) の無名引数は Nat.add_comm b c
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ここで ?Goal の型は P x なので、(fun n : nat =&gt; a * n = a * (c + b)) (c + b) であり、
+ちょっと計算を進めると（ベータ展開すると）a * (c + b) = a * (c + b) です。
+これはこの時点で証明すべき命題と一致しています。
+
+<div class="paragraph"> </div>
+
+また、eq_ind_r の返り値の型は P y です。
+つまり (fun n : nat =&gt; a * n = a * (c + b)) (b + c) であり、
+ちょっと計算を進めると a * (b + c) = a * (c + b) です。
+これは、rewrite する前の命題と一致しています。
+
+<div class="paragraph"> </div>
+
+結局、rewrite は eq_ind_r を使って、
+P x すなわち a * (c + b) = a * (c + b) の証明から
+P y すなわち a * (b + c) = a * (c + b) の証明を作り上げる、
+という証明項を構築しています。
+
+<div class="paragraph"> </div>
+
+P x の部分の証明はまだ行っていないので ?Goal として残っており、
+これが次に証明すべき命題としてユーザに提示されるというわけです。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(eq_ind_r (fun n : nat =&gt; a * n = a * (c + b)) eq_refl (Nat.add_comm b c))
+</pre>
+
+<div class="paragraph"> </div>
+
+rewrite の結果、右辺と左辺が同じ形になったので、reflexivity で証明できます。
+Show Proof の結果をみると、
+reflexivity で eq_refl という証明項が構築されていることがわかります。
+（これは省略された形で、実際は @eq_refl nat (a * (c + b)) です。）
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="keyword">Rewrite</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+ところで、rewrite で match, let, 関数抽象の body を書き換えようとして
+書き換えられずに困ったことはないでしょうか。
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ <a class="idref" href="rewrite.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 2<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="rewrite.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.PeanoNat.html#Nat.add_comm"><span class="id" title="lemma">Nat.add_comm</span></a>.<br/>
+</div>
+
+<div class="doc">
+ここでは、a + 2 を 2 + a に書き換えようとして、
+rewrite Nat.add_comm としていますが失敗してしまいます。
+
+<div class="paragraph"> </div>
+
+これは、rewrite が eq_ind_r を使って作り上げる証明項を考えると理解できます。
+eq_ind_r には x として 2 + a, y として a + 2 を渡す必要がありますが、
+eq_ind_r の引数の場所で a は束縛されていないので参照できません。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+書き換えたい項が関数抽象の本体の中にあっても、
+書き換えたい項自身の中に束縛変数が含まれていないのであれば、
+rewrite で書き換えることができます。
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ <a class="idref" href="rewrite.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">(</span></a>2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="rewrite.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.PeanoNat.html#Nat.add_0_r"><span class="id" title="lemma">Nat.add_0_r</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(@eq_ind_r nat 2
+   (fun n : nat =&gt; (fun a : nat =&gt; a + n) = (fun a : nat =&gt; 2 + a)) ?Goal
+   (2 + 0) (Nat.add_0_r 2))
+</pre>
+
+<div class="paragraph"> </div>
+
+たとえばこの例では、関数抽象の中にある 2 + 0 を
+Nat.add_0_r を使って 2 に書き換えています。
+
+<div class="paragraph"> </div>
+
+この証明項では、@eq_ind_r の第5引数に 2 + 0 が現れていることが分かります。
+
+<div class="paragraph"> </div>
+
+この、2 + 0 が置かれている場所では a の束縛は行われていないので、
+a は使えません。
+2 + 0 に a は使われていないので問題ありませんが、
+2 + 0 のところに 2 + a を与えようとすれば証明項は束縛されていない a を参照してしまう
+ことになってしまいます。
+
+<div class="paragraph"> </div>
+
+というわけで、(証明すべき命題の中で) 束縛されている変数は rewrite では使えないわけです。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
