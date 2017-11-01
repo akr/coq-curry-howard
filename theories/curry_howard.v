@@ -10,10 +10,8 @@ Coq はカリーハワード対応を利用して
 証明項（プログラムですが、あまりプログラムとしては意識しないので証明項と呼びましょう）
 がどのようなものか意識することは少ないのではないでしょうか。
 
-たとえば、move=> H がなにをする（どんな証明項を構築する）のか
+たとえば、intros H がなにをする（どんな証明項を構築する）のか
 わかるでしょうか。
-
-（この文章は SSReflect 前提なので、intro じゃなくて move=> を使っています）
 
 ここでは Coq のいろいろなコマンドがなにをするものなのか、また、
 それをどうやって調べるのか説明します。
@@ -24,7 +22,8 @@ Coq はカリーハワード対応を利用して
 
 - % auto % # <a href="auto.html">auto</a> #
 - % exact % # <a href="exact.html">exact</a> #
-- % move=> % # <a href="intro.html">move=&gt;</a> #
+- % intro % # <a href="intro.html">intro</a> #
+  % move=> % # <a href="ssr_intro.html">move=&gt;</a> #
 - % Section % # <a href="section.html">Section</a> #
 - % move: % # <a href="discharge.html">move:</a> #
 - % apply % # <a href="apply.html">apply</a> #

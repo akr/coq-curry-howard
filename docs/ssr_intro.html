@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>intro</title>
+<title>ssr_intro</title>
 </head>
 
 <body>
@@ -16,35 +16,34 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library intro</h1>
+<h1 class="libtitle">Library ssr_intro</h1>
 
 <div class="code">
+<span class="id" title="var">From</span> <span class="id" title="var">mathcomp</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">all_ssreflect</span>.<br/>
+
+<br/>
 </div>
 
 <div class="doc">
-<a name="lab4"></a><h2 class="section">intro</h2>
+<a name="lab5"></a><h2 class="section">move=&gt;</h2>
 
 
 <div class="paragraph"> </div>
 
 この forall (P : Prop), P -&gt; P という命題を、今度は
-intro と exact を使って証明してみましょう。
+move=&gt; と exact を使って証明してみましょう。
+
+<div class="paragraph"> </div>
+
+正確には、move=&gt; というのは move というなにもしない tactic に =&gt; という tactical をつけたもので、
+他の tactic にも =&gt; をつけられるのですが、その点については気にしないことにします。
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>), <a class="idref" href="intro.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="intro.html#P"><span class="id" title="variable">P</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>), <a class="idref" href="ssr_intro.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="ssr_intro.html#P"><span class="id" title="variable">P</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-</div>
-
-<div class="doc">
-1 subgoal
-<i>____________________________________</i>(1/1)
-forall P : Prop, P -&gt; P
-
-</div>
-<div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -61,19 +60,7 @@ forall P : Prop, P -&gt; P という型の
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">P</span>.<br/>
-</div>
-
-<div class="doc">
-<pre>
-1 subgoal
-P : Prop
-______________________________________(1/1)
-P -&gt; P
-</pre>
-
-</div>
-<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">P</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -81,11 +68,11 @@ P -&gt; P
 <pre>
 (fun P : Prop =&gt; ?Goal)
 </pre>
-intro P により、証明すべき命題 forall P : Prop, P -&gt; P の左側の
+move=&gt; P により、証明すべき命題 forall P : Prop, P -&gt; P の左側の
 forall P : Prop という部分が前提に移動して前提に P : Prop が入り、
 証明すべき命題は P -&gt; P に変化します。
 ここで Show Proof とすると、(fun P : Prop =&gt; ?Goal) と表示されます。
-つまり、intro P は証明項を Prop型の値Pを受け取る関数抽象として構築せよ、
+つまり、move=&gt; P は証明項を Prop型の値Pを受け取る関数抽象（λ式）として構築せよ、
 という指示です。
 関数抽象の本体はまだ不明なので ?Goal となっていますが、
 この部分の型は (forall P : Prop, P -&gt; P から左側の forall P : Prop を取り除いた型である)
@@ -107,20 +94,7 @@ P -&gt; P から、forall _ : P, P に変化します。
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>.<br/>
-</div>
-
-<div class="doc">
-<pre>
-1 subgoal
-P : Prop
-H : P
-______________________________________(1/1)
-P
-</pre>
-
-</div>
-<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -128,7 +102,7 @@ P
 <pre>
 (fun (P : Prop) (H : P) =&gt; ?Goal)
 </pre>
-intro H により、証明すべき命題 P -&gt; P の左側の P -&gt; が消えて
+move=&gt; H により、証明すべき命題 P -&gt; P の左側の P -&gt; が消えて
 前提に H : P に移動し、証明すべき命題は P に変化します。
 
 <div class="paragraph"> </div>
@@ -144,11 +118,11 @@ Show Proof とすると、(fun (P : Prop) (H : P) =&gt; ?Goal) と表示され�
 Display notations が無効にするとわかるように、
 これは証明すべき命題 forall _ : P, P の左側の
 forall _ : P が前提に移動した、というわけで、
-最初の intro P が forall P : Prop を前提に移動したのと
+最初の move=&gt; P が forall P : Prop を前提に移動したのと
 同様なことをしていることがわかるでしょう。
 ただし、forall P : Prop では、Prop 型の値に P という名前がついていましたが、
 今回の forall _ : P では、P 型の値に名前がついておらず、_ になっています。
-どちらにしても、intro で指定した名前が関数抽象で導入される変数の名前として使われます。
+どちらにしても、move=&gt; で指定した名前が関数抽象で導入される変数の名前として使われます。
 
 <div class="paragraph"> </div>
 
@@ -159,27 +133,19 @@ forall _ : P が前提に移動した、というわけで、
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
-</div>
-
-<div class="doc">
-<pre>
-No more subgoals.
-</pre>
-
-</div>
-<div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
 <div class="doc">
 <pre>
-(fun (P : Prop) (H : P) =&gt; H)
+(fun P : Prop =&gt; id)
 </pre>
 P という型の値としては H が存在する（参照できる）ので、
 それを証明項として与えれば証明は終わりです。
 exact H により H を証明項として直接与えると No more subgoals. と表示されて
 証明が終ったことがわかります。
-ここで Show Proof とすると、(fun (P : Prop) (H : P) =&gt; H) と表示され、
+ここで Show Proof とすると、(fun P : Prop =&gt; id) と表示されます。
+Display notations を無効にすれば (fun (P : Prop) (H : P) =&gt; H) と表示され、
 上で ?Goal だったところに H が埋められていることが分かります。
 証明項に不明な部分はもうないので、やることはもうありません。
 Qed で証明を終りましょう。
