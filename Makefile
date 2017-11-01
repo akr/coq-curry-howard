@@ -13,6 +13,8 @@ clean :
 	  theories/*.vo \
 	  theories/*.d \
 	  theories/*.aux \
-	  theories/.*.aux
+	  theories/.*.aux \
+	  html && \
+        rm -rf docs
 
 .PHONY: all clean
