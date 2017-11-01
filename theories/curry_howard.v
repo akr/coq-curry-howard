@@ -26,11 +26,14 @@ Coq はカリーハワード対応を利用して
   SSReflect:
   % move=> % # <a href="ssr_intro.html">move=&gt;</a> #
 - % Section % # <a href="section.html">Section</a> #
-- SSReflect:
+- revert
+  generalize
+  SSReflect:
   % move:% # <a href="ssr_discharge.html">move:</a> #
 - % apply % # <a href="apply.html">apply</a> #
 - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
-- SSReflect:
+- rewrite
+  SSReflect:
   % rewrite % # <a href="ssr_rewrite.html">rewrite</a> #
 - % destruct % # <a href="destruct.html">destruct</a> #
   SSReflect:
