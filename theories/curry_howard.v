@@ -38,6 +38,31 @@ Coq はカリーハワード対応を利用して
 - % destruct % # <a href="destruct.html">destruct</a> #
   SSReflect:
   % case % # <a href="ssr_case.html">case</a> #
+- induction
+  SSReflect:
+  elim
+- f_equal
+  SSReflect:
+  congr
+- assert
+  SSReflect:
+  have
+- SSReflect:
+  wlog
+  suff
+- SSReflect: pose set unlock
+- specialize
+- unfold fold cutrewrite
+- injection case_eq
+- refine
+- simpl
+- clear
+- now
+- discriminate
+- assumption
+- contradiction
+- pattern
+
 *)
 
 (**
