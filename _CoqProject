@@ -4,6 +4,8 @@ theories/exact.v
 theories/intro.v
 theories/ssr_intro.v
 theories/section.v
+theories/revert.v
+theories/generalize.v
 theories/ssr_discharge.v
 theories/apply.v
 theories/reflexivity.v

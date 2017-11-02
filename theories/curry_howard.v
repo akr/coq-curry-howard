@@ -26,8 +26,9 @@ Coq はカリーハワード対応を利用して
   SSReflect:
   % move=> % # <a href="ssr_intro.html">move=&gt;</a> #
 - % Section % # <a href="section.html">Section</a> #
-- revert
-  generalize
+- % revert % # <a href="revert.html">revert</a> #
+  % generalize % # <a href="generalize.html">generalize</a> #
+  specialize
   SSReflect:
   % move:% # <a href="ssr_discharge.html">move:</a> #
 - % apply % # <a href="apply.html">apply</a> #
@@ -51,7 +52,6 @@ Coq はカリーハワード対応を利用して
   wlog
   suff
 - SSReflect: pose set unlock
-- specialize
 - unfold fold cutrewrite
 - injection case_eq
 - refine
