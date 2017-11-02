@@ -218,8 +218,36 @@ goal: <tt>forall m : nat, m + (a + a) + m &lt; b</tt>
 すべてでなく、一部分だけを置き換えるには、generalize に at を指定します。
 ここでは、1 3 を指定することにより、1番めと3番めの a + a を置き換えています。
 
+<div class="paragraph"> </div>
+
+なお、バグか仕様かはわかりませんが、置き換えを行わないようにするには、
+at のところに 0 を指定することができるようです。(Coq 8.6 で確認)
+
 </div>
 <div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Restart</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> (<a class="idref" href="generalize.html#Generalize.a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="generalize.html#Generalize.a"><span class="id" title="variable">a</span></a>) <span class="id" title="tactic">at</span> 0 <span class="id" title="keyword">as</span> <span class="id" title="var">m</span>.<br/>
+</div>
+
+<div class="doc">
+goal: <tt>nat -&gt; a + a + (a + a) + (a + a) &lt; b</tt>
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(?Goal (a + a))
+</pre>
+
+</div>
+<div class="code">
+
+<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 
 <br/>

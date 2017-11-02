@@ -111,7 +111,22 @@ goal: <<forall m : nat, m + (a + a) + m < b>>
 
 すべてでなく、一部分だけを置き換えるには、generalize に at を指定します。
 ここでは、1 3 を指定することにより、1番めと3番めの a + a を置き換えています。
+
+なお、バグか仕様かはわかりませんが、置き換えを行わないようにするには、
+at のところに 0 を指定することができるようです。(Coq 8.6 で確認)
 *)
+  Restart.
+  generalize (a + a) at 0 as m.
+(**
+goal: <<nat -> a + a + (a + a) + (a + a) < b>>
+*)
+  Show Proof.
+(**
+<<
+(?Goal (a + a))
+>>
+*)
+
 Abort.
 
 End Generalize.
