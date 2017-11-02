@@ -19,9 +19,6 @@
 <h1 class="libtitle">Library exact</h1>
 
 <div class="code">
-<span class="id" title="var">From</span> <span class="id" title="var">mathcomp</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">all_ssreflect</span>.<br/>
-
-<br/>
 </div>
 
 <div class="doc">
@@ -65,14 +62,13 @@ forall P : Prop, P -&gt; P という型の
 
 <div class="doc">
 <pre>
-(fun P : Prop =&gt; id)
+(fun (P : Prop) (H : P) =&gt; H)
 </pre>
 exact では ?Goal に埋めるべき証明項を直接指定することができます。
 ここでは、auto で作られたのと同じ、(fun (P : Prop) (H : P) =&gt; H) を指定しています。
 これにより、No more subgoals. と表示され、証明が終わったことがわかります。
-その後で Show Proof とすると、(fun P : Prop =&gt; id) と表示され、
+その後で Show Proof とすると、(fun (P : Prop) (H : P) =&gt; H) と表示され、
 exact で指定した証明項が構築されていることがわかります。
-(id と表示されるのは、Notation を使って表示するというデフォルト設定だからです)
 
 </div>
 <div class="code">

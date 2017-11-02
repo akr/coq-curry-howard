@@ -1,4 +1,4 @@
-From mathcomp Require Import all_ssreflect.
+Require Import Arith.
 
 (** ** reflexivity
 
@@ -15,14 +15,14 @@ Proof.
   Show Proof.
 (**
 <<
-(erefl 0)
+eq_refl
 >>
 
 なんか、省略されているっぽいので Display all low-level contents を有効にして
 Show Proof をやり直すと、以下のようになります。
 
 <<
-(@Logic.eq_refl nat O)
+(@eq_refl nat O)
 >>
 
 O というのは 0 です。
@@ -42,7 +42,7 @@ eq 型の値を構成する eq_refl というコンストラクタを定義し�
 単にひとつの型とコンストラクタを定義しているわけではありません。
 
 About で eq 定義を調べてみましょう。
-(Display implicit arguments を有効にして、Display notations を無効にしておきます)
+(Display implicit arguments を有効、Display notations を無効にしておきます)
 *)
 About eq.
 (**
@@ -55,14 +55,11 @@ eq : forall (A : Type) (_ : A) (_ : A), Prop
 
 コンストラクタの eq_refl も調べてみましょう。
 *)
-About Logic.eq_refl.
+About eq_refl.
 (**
 <<
-Logic.eq_refl : forall (A : Type) (x : A), @eq A x x
+eq_refl : forall (A : Type) (x : A), @eq A x x
 >>
-
-About eq_refl だと mathcomp.ssreflect.eqtype.eq_refl が出てきてしまうので、
-Logic.eq_refl と指定しています。
 
 eq_refl は A という型と A 型の値 x を受け取って @eq A x x という型の値を返す関数
 であることがわかります。
@@ -113,16 +110,13 @@ Proof.
   Show Proof.
 (**
 <<
-(erefl (5 + 1))
+(@eq_refl nat (5 + 1))
 >>
 
 どうやら問題なく証明できてしまうようです。
-証明項は erefl (5 + 1) であり、
-これは <<@Logic.eq_refl nat (addn (S (S (S (S (S O))))) (S O))>> の意味です。
-S はペアノの自然数の後者関数で、1を加える関数なので、
-つまり <<@Logic.eq_refl nat (5 + 1)>> です。
+証明項は (@eq_refl nat (5 + 1)) です。
 
-どうも、reflexivity は等式の右辺を erefl の引数にする感じです。
+どうも、reflexivity は等式の右辺を eq_refl の引数にする感じです。
 
 そうでない証明項は許されるのか、exact で証明項を与えて試してみましょう。
 *)
@@ -130,11 +124,11 @@ Qed.
 
 Goal 2 + 4 = 5 + 1.
 Proof.
-  exact (erefl 6).
+  exact (eq_refl 6).
   Show Proof.
 (**
 <<
-(erefl 6)
+(@eq_refl nat 6)
 >>
 *)
 Qed.
@@ -142,12 +136,12 @@ Qed.
 (**
 とくに問題なく証明できました。
 
-つまり、erefl 6 つまり @Logic.eq_refl nat 6 という項は
+つまり、eq_refl 6 という項は
 @eq nat (2 + 4) (5 + 1) という型の値として正しく受け付けられるというわけです。
 
 「eq_refl は A という型と A 型の値 x を受け取って @eq A x x という型の値を返す関数」
 と上で述べましたが、ここで eq_refl の引数として指定した x は 6 です。
-したがって、erefl 6 は @eq nat 6 6 型の値なわけですが、
+したがって、eq_refl 6 は @eq nat 6 6 型の値なわけですが、
 Coq はここで、この型が @eq nat (2 + 4) (5 + 1) 型と等しいかどうか確認します。
 具体的には、計算を進めて同じ項になるかどうかを確認します。
 2 + 4 や 5 + 1 は変数が入っていないので計算を最後まで行うことができ、その結果は 6 です。
@@ -180,7 +174,7 @@ Coq で n + 1 と 1 + n がどこまで計算を進められるか、Compute と
      = (fix Ffix (x x0 : nat) {struct x} : nat :=
           match x with
           | 0 => x0
-          | x1.+1 => (Ffix x1 x0).+1
+          | S x1 => S (Ffix x1 x0)
           end) n 1
      : nat
 >>
@@ -196,12 +190,8 @@ n + 1 というのは、なにか fix とかいうもので始まる関数が展
   Compute 1 + n.
 (**
 <<
-     = n.+1
->>
-SSReflect の notation が効いているので Display notations を無効にしてやりなおすと
-以下のようになります。
-<<
      = S n
+     : nat
 >>
 1 + n では、かなり単純な項になるまで計算が進んでいます。
 
@@ -222,7 +212,7 @@ Proof.
   Show Proof.
 (**
 <<
-(erefl (2 ^ 100))
+(@eq_refl nat (2 ^ 100))
 >>
 
 2 ^ 100 というのは 2 の 100乗で、本当に計算しようとすると、メモリがあふれてしまいます。

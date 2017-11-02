@@ -19,9 +19,6 @@
 <h1 class="libtitle">Library apply</h1>
 
 <div class="code">
-<span class="id" title="var">From</span> <span class="id" title="var">mathcomp</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">all_ssreflect</span>.<br/>
-
-<br/>
 </div>
 
 <div class="doc">
@@ -129,28 +126,13 @@ P 型の値として Hp があるので、それを exact Hp として証明項�
 <div class="doc">
 <pre>
 modus_ponens =
-fun (P Q : Prop) (Hp : P) =&gt; @^~ Hp
+fun (P Q : Prop) (Hp : P) (Hpq : P -&gt; Q) =&gt; Hpq Hp
      : forall P Q : Prop, P -&gt; (P -&gt; Q) -&gt; Q
 </pre>
 
 <div class="paragraph"> </div>
 
-section を終ってから三段論法の証明項を Print で表示すると上のようになりますが、
-@^~ というのがよくわかりません。
-（これはじつは SSReflect の ssrfun.v で Notation "@^~ x" := (fun f =&gt; f x) として
-定義されている記法です。）
-
-<div class="paragraph"> </div>
-
-そこで、Display notations を無効にして表示しなおすと、下のようになります。
-
-<div class="paragraph"> </div>
-
-<pre>
-modus_ponens =
-fun (P Q : Prop) (Hp : P) (Hpq : forall _ : P, Q) =&gt; Hpq Hp
-     : forall (P Q : Prop) (_ : P) (_ : forall _ : P, Q), Q
-</pre>
+section を終ってから三段論法の証明項を Print で表示すると上のようになります。
 
 <div class="paragraph"> </div>
 

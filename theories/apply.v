@@ -1,5 +1,3 @@
-From mathcomp Require Import all_ssreflect.
-
 (** ** apply
 
 apply も move: と同様に証明項として関数適用を構築します。
@@ -67,22 +65,11 @@ Print modus_ponens.
 (**
 <<
 modus_ponens =
-fun (P Q : Prop) (Hp : P) => @^~ Hp
+fun (P Q : Prop) (Hp : P) (Hpq : P -> Q) => Hpq Hp
      : forall P Q : Prop, P -> (P -> Q) -> Q
 >>
 
-section を終ってから三段論法の証明項を Print で表示すると上のようになりますが、
-@^~ というのがよくわかりません。
-（これはじつは SSReflect の ssrfun.v で Notation "@^~ x" := (fun f => f x) として
-定義されている記法です。）
-
-そこで、Display notations を無効にして表示しなおすと、下のようになります。
-
-<<
-modus_ponens =
-fun (P Q : Prop) (Hp : P) (Hpq : forall _ : P, Q) => Hpq Hp
-     : forall (P Q : Prop) (_ : P) (_ : forall _ : P, Q), Q
->>
+section を終ってから三段論法の証明項を Print で表示すると上のようになります。
 
 Hpq Hp という項に、P, Q, Hp, Hpq という引数の関数抽象が外側にくくられた
 証明項になっていることがわかります。

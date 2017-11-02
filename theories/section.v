@@ -1,5 +1,3 @@
-From mathcomp Require Import all_ssreflect.
-
 (** ** Section
 他の tactic の説明の前に、Section というコマンドを紹介しましょう。
 Section というのはセクションを作ります。
@@ -26,7 +24,7 @@ P が成り立つならば P が成り立つことを証明し、その証明に
 Print LemmaPP'.
 (**
 <<
-LemmaPP' = id
+LemmaPP' = fun H : P => H
      : P -> P
 >>
 証明が終った後、セクションを終る前に、
@@ -39,7 +37,7 @@ End SectionExplanation.
 Print LemmaPP'.
 (**
 <<
-LemmaPP' = fun P : Prop => id
+LemmaPP' = fun (P : Prop) (H : P) => H
      : forall P : Prop, P -> P
 >>
 セクションを終ってから再度 Print LemmaPP' とすると、上のように異なる表示になります。

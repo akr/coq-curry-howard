@@ -19,9 +19,6 @@
 <h1 class="libtitle">Library section</h1>
 
 <div class="code">
-<span class="id" title="var">From</span> <span class="id" title="var">mathcomp</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">all_ssreflect</span>.<br/>
-
-<br/>
 </div>
 
 <div class="doc">
@@ -68,7 +65,7 @@ P が成り立つならば P が成り立つことを証明し、その証明に
 
 <div class="doc">
 <pre>
-LemmaPP' = id
+LemmaPP' = fun H : P =&gt; H
      : P -&gt; P
 </pre>
 証明が終った後、セクションを終る前に、
@@ -87,7 +84,7 @@ Print LemmaPP' とすると、上のように表示されます。
 
 <div class="doc">
 <pre>
-LemmaPP' = fun P : Prop =&gt; id
+LemmaPP' = fun (P : Prop) (H : P) =&gt; H
      : forall P : Prop, P -&gt; P
 </pre>
 セクションを終ってから再度 Print LemmaPP' とすると、上のように異なる表示になります。
