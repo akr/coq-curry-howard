@@ -19,7 +19,7 @@
 <h1 class="libtitle">Library reflexivity</h1>
 
 <div class="code">
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
 
 <br/>
 </div>
@@ -44,7 +44,7 @@ SSReflect ではふつう <tt>by []</tt> などで済ますのであまり使い
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 0.<br/>
+<span class="id" title="keyword">Goal</span> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 0.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
@@ -97,7 +97,7 @@ About で eq 定義を調べてみましょう。
 
 </div>
 <div class="code">
-<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a>.<br/>
+<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -116,7 +116,7 @@ eq : forall (A : Type) (_ : A) (_ : A), Prop
 
 </div>
 <div class="code">
-<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>.<br/>
+<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -191,7 +191,7 @@ a と b は等しいということがいえるわけです。
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 4 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 5 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
+<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 4 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 5 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
@@ -220,9 +220,9 @@ a と b は等しいということがいえるわけです。
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 4 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 5 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
+<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 4 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 5 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a> 6).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a> 6).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -274,10 +274,10 @@ erefl 6 が @eq nat (2 + 4) (5 + 1) 型の要素であることを判断でき�
 <span class="id" title="keyword">Section</span> <a name="AddComm"><span class="id" title="section">AddComm</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Variable</span> <a name="AddComm.n"><span class="id" title="variable">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="AddComm.n"><span class="id" title="variable">n</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">reflexivity</span>.<br/>
 </div>
@@ -293,7 +293,7 @@ Coq で n + 1 と 1 + n がどこまで計算を進められるか、Compute と
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="keyword">Compute</span> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Compute</span> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 1.<br/>
 </div>
 
 <div class="doc">
@@ -318,7 +318,7 @@ n + 1 というのは、なにか fix とかいうもので始まる関数が展
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="keyword">Compute</span> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Compute</span> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="reflexivity.html#AddComm.n"><span class="id" title="variable">n</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -349,7 +349,7 @@ reflexivity は完全に計算を進めるわけではありません。
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.PeanoNat.html#4c362bcf0e947e2792a2e6989b44aeb0"><span class="id" title="notation">^</span></a> 100 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.6/stdlib/Coq.Arith.PeanoNat.html#4c362bcf0e947e2792a2e6989b44aeb0"><span class="id" title="notation">^</span></a> 100.<br/>
+<span class="id" title="keyword">Goal</span> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Arith.PeanoNat.html#4c362bcf0e947e2792a2e6989b44aeb0"><span class="id" title="notation">^</span></a> 100 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Arith.PeanoNat.html#4c362bcf0e947e2792a2e6989b44aeb0"><span class="id" title="notation">^</span></a> 100.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>

@@ -9,6 +9,7 @@ Makefile.coq : _CoqProject
 clean :
 	rm -f \
 	  Makefile.coq \
+	  Makefile.coq.conf \
 	  theories/*.glob \
 	  theories/*.vo \
 	  theories/*.d \
