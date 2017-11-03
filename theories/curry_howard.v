@@ -20,38 +20,41 @@ Coq はカリーハワード対応を利用して
 
 (**
 
-- % auto % # <a href="auto.html">auto</a> #
-- % exact % # <a href="exact.html">exact</a> #
-- % intro % # <a href="intro.html">intro</a> #
-  SSReflect:
-  % move=> % # <a href="ssr_intro.html">move=&gt;</a> #
-- % Section % # <a href="section.html">Section</a> #
-- % revert % # <a href="revert.html">revert</a> #
-  % generalize % # <a href="generalize.html">generalize</a> #
-  specialize
-  SSReflect:
-  % move:% # <a href="ssr_discharge.html">move:</a> #
-- % apply % # <a href="apply.html">apply</a> #
-- % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
-- % rewrite % # <a href="rewrite.html">rewrite</a> #
-  SSReflect:
-  % rewrite % # <a href="ssr_rewrite.html">rewrite</a> #
-- % destruct % # <a href="destruct.html">destruct</a> #
-  SSReflect:
-  % case % # <a href="ssr_case.html">case</a> #
-- induction
-  SSReflect:
-  elim
+- 自動証明
+  - % auto % # <a href="auto.html">auto</a> #
+- 証明項を直接指定する
+  - % exact % # <a href="exact.html">exact</a> #
+- 関数抽象を構築する
+  - % intro % # <a href="intro.html">intro</a> #
+  - % move=> % # <a href="ssr_intro.html">move=&gt;</a> # (SSReflect)
+  - % Section % # <a href="section.html">Section</a> #
+- 関数適用とその引数部分を構築する
+  - % revert % # <a href="revert.html">revert</a> #
+  - % generalize % # <a href="generalize.html">generalize</a> #
+  - % move:% # <a href="ssr_discharge.html">move:</a> # (SSReflect)
+- 関数適用とその関数部分を構築する
+  - % apply % # <a href="apply.html">apply</a> #
+- let 式を構築する
+  - pose
+  - % specialize % # <a href="specialize.html">specialize</a> #
+- eq_refl で等式を証明する
+  - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
+- eq_ind_r で等式による書き換えを行う
+  - % rewrite % # <a href="rewrite.html">rewrite</a> #
+  - % rewrite % # <a href="ssr_rewrite.html">rewrite</a> # (SSReflect)
+- match 式を構築する
+  - % destruct % # <a href="destruct.html">destruct</a> #
+  - % case % # <a href="ssr_case.html">case</a> # (SSReflect)
+- 数学的帰納法を適用する
+  - induction
+  - elim (SSReflect)
 - f_equal
-  SSReflect:
-  congr
+  congr (SSReflect)
 - assert
-  SSReflect:
-  have
-- SSReflect:
-  wlog
-  suff
-- SSReflect: pose set unlock
+  have (SSReflect)
+- wlog (SSReflect)
+  suff (SSReflect)
+- pose set unlock
 - unfold fold cutrewrite
 - injection case_eq
 - refine

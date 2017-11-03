@@ -40,7 +40,7 @@ generalize というのは、定理を特殊化する tactic です。
 <div class="paragraph"> </div>
 
 直観主義論理において
-ある命題の2重否定がその命題と等価であるためには、
+命題の2重否定がその命題と等価であるためには、
 その命題が decidable でなければなりません。
 命題が decidable であればその命題の 2重否定を除去できるという定理 dec_not_not があります。
 
@@ -105,7 +105,7 @@ specialize により、上の定理が前提に入ります。
 <pre>
 (let not_not := dec_not_not P DP : (~ P -&gt; False) -&gt; P in ?Goal)
 </pre>
-証明項は、let により、not_not という名前で
+証明項では、let により、not_not という名前で
 dec_not_not P DP という証明項が束縛されています。
 従って、?Goal の中では、not_not を使えます。
 
