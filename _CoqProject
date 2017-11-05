@@ -8,6 +8,7 @@ theories/revert.v
 theories/generalize.v
 theories/ssr_discharge.v
 theories/apply.v
+theories/set.v
 theories/specialize.v
 theories/reflexivity.v
 theories/rewrite.v

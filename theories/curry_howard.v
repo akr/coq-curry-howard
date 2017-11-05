@@ -35,7 +35,7 @@ Coq はカリーハワード対応を利用して
 - 関数適用とその関数部分を構築する
   - % apply % # <a href="apply.html">apply</a> #
 - let 式を構築する
-  - pose
+  - % pose, set % # <a href="set.html">pose, set</a> #
   - % specialize % # <a href="specialize.html">specialize</a> #
 - eq_refl で等式を証明する
   - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
