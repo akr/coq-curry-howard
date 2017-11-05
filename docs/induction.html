@@ -1,0 +1,487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>induction</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library induction</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab19"></a><h2 class="section">induction</h2>
+
+
+<div class="paragraph"> </div>
+
+induction term というのは数学的帰納法を適用する tactic です。
+term は帰納的に定義された型である必要があります。
+
+<div class="paragraph"> </div>
+
+induction が構築する証明項をみるために、a + 0 = a を証明してみましょう。
+加算 (Nat.add) は第1引数で場合分けして計算を進めます。
+この a + 0 というのは第1引数が変数なため、その場合分けを行えず、
+計算を進めることができません。
+そのため、これを証明するには帰納法が必要になります。
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール: <tt>a + 0 = a</tt>
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+証明項: <tt>(fun a : nat =&gt; ?Goal)</tt>
+<div class="paragraph"> </div>
+
+induction の直前では、intros で構築した関数抽象の本体がゴールとなっています。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">a</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール1: <tt>0 + 0 = 0</tt>
+<div class="paragraph"> </div>
+
+ゴール2: <tt>S a + 0 = S a</tt>
+<div class="paragraph"> </div>
+
+induction の直後では、a が 0 の場合のゴールと、
+a が 0 でない (つまり S a の場合の) ゴールのふたつのゴールが生成されています。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+証明項:
+<pre>(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0)
+   ?Goal
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal0@{a:=a0})
+   a)</pre>
+
+<div class="paragraph"> </div>
+
+証明項をみると、nat_ind という関数を呼び出しており、
+引数の中には ?Goal と ?Goal0@{n:=n0} があって、
+ふたつのゴールがあることがわかります。
+
+<div class="paragraph"> </div>
+
+nat_ind がどんな関数なのか About でみてみましょう。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+nat_ind :
+forall P : nat -&gt; Prop,
+  P 0 -&gt;
+  (forall n : nat, P n -&gt; P (S n)) -&gt;
+  forall n : nat,
+  P n
+</pre>
+
+<div class="paragraph"> </div>
+
+Display notations を無効にして About しなおすと以下のようになります。
+
+<div class="paragraph"> </div>
+
+<pre>
+nat_ind :
+forall (P : forall _ : nat, Prop)
+  (_ : P O)
+  (_ : forall (n : nat) (_ : P n), P (S n))
+  (n : nat),
+  P n
+</pre>
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> 第1引数 P として nat を受け取って命題を返す関数を受けとります。
+
+</li>
+<li> 第2引数に P 0 の証明を受け取ります。
+
+</li>
+<li> 第3引数に n と P n の証明を受け取って P (S n) の証明を返す関数を受けとります。
+
+</li>
+<li> 第4引数に n を受けとります。
+
+</li>
+<li> そして、P n の証明を返します。
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+直感的には、nat_ind は、第2引数から始めて n 回第3引数を適用したものを返すと
+理解すればよさそうです。
+
+<div class="paragraph"> </div>
+
+証明項で実引数は以下のようになっています。
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> 第1引数: (fun a0 : nat =&gt; a0 + 0 = a0)
+
+</li>
+<li> 第2引数: ?Goal
+
+</li>
+<li> 第3引数: (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal0@{a:=a0})
+
+</li>
+<li> 第4引数: a
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+返り値の型 P n は (fun a0 : nat =&gt; a0 + 0 = a0) a すなわち a + 0 = a であり、
+induction を行う直前のゴールと一致しています。
+
+<div class="paragraph"> </div>
+
+nat_ind の第2引数の型 P 0 は (fun a0 : nat =&gt; a0 + 0 = a0) 0 すなわち 0 + 0 = 0 であり、
+induction を行った後の最初のゴールと一致しています。
+
+<div class="paragraph"> </div>
+
+0 + 0 = 0 は計算すれば左右が同じになるので reflexivity で証明できます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal@{a:=a0}) a)
+</pre>
+
+<div class="paragraph"> </div>
+
+最初のゴールは reflexivity で生成された eq_refl が埋まったことがわかります。
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+次に、ふたつめのゴールにとりかかることになります。
+ここでは、以下の前提が表示されています。
+<pre>
+a : nat
+IHa : a + 0 = a
+</pre>
+そして、<tt>S a + 0 = S a</tt> というゴールを証明しなければなりません。
+
+<div class="paragraph"> </div>
+
+nat_ind の第3引数の型 forall n : nat, P n -&gt; P (S n) を展開すると
+forall n : nat, n + 0 = n -&gt; S n + 0 = S n となります。
+第3引数の実引数は (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal0@{a:=a0}) であり、
+すでに関数抽象が2段階生成されています。
+表示されている a と IHa という前提はこの a0 と IHa に対応しています。
+ゴールに @{a:=a0} と付記されているのは、
+仮引数は a0 なのに前提は a という名前になっていることを示しているのでしょう。
+
+<div class="paragraph"> </div>
+
+これを証明するにはまず simpl としてゴール内で計算を進められるところを進めてしまいます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール: <tt>S (a + 0) = S a</tt>
+<div class="paragraph"> </div>
+
+証明項:
+<pre>(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal@{a:=a0}) a)</pre>
+
+<div class="paragraph"> </div>
+
+simpl では計算を進めるだけで、そういう計算でたどり着ける項は等しいと考えるので、
+証明項は変わりません。
+
+<div class="paragraph"> </div>
+
+simpl の結果、ゴール内に a + 0 という IHa で書き換えられる部分が出てきたので書き換えます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHa</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール: <tt>S a = S a</tt>
+<div class="paragraph"> </div>
+
+証明項:
+<pre>(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt;
+    eq_ind_r (fun n : nat =&gt; S n = S a0) ?Goal@{a:=a0} IHa) a)</pre>
+
+<div class="paragraph"> </div>
+
+rewrite により、eq_ind_r の呼び出しが生成され、ゴールは S a = S a に変化します。
+このゴールは両辺が等しいので、reflexivity で証明できます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+証明項:
+<pre>(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt;
+    eq_ind_r (fun n : nat =&gt; S n = S a0) eq_refl IHa) a)</pre>
+
+<div class="paragraph"> </div>
+
+ゴールに eq_refl が埋まって、ゴールがなくなったのでこれで証明は終了です。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+induction が nat_ind を呼び出す関数呼び出しを構築することがわかりました。
+
+<div class="paragraph"> </div>
+
+そこで、induction ではなく、apply で同じ証明項を構築してみましょう。
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
+</div>
+
+<div class="doc">
+induction a とするかわりに、(nat_ind (fun a0 : nat =&gt; a0 + 0 = a0)) という
+関数の呼び出しを構築します。
+第1引数を指定しているのは、指定しない場合に Coq が推論する項はこれとは異なる項になってしまうからです。
+指定しない場合については後でみてみましょう。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">a0</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール1: <tt>0 + 0 = 0</tt>
+<div class="paragraph"> </div>
+
+ゴール2: <tt>forall n : nat, n + 0 = n -&gt; S n + 0 = S n</tt>
+<div class="paragraph"> </div>
+
+証明項: <tt>(fun a : nat =&gt; nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) ?Goal ?Goal0 a)</tt>
+<div class="paragraph"> </div>
+
+期待通り nat_ind の呼び出しが構築されています。
+induction とは異なり、第3引数の関数抽象は構築されていませんが、
+apply は関数呼び出しを構築するものですからしょうがないでしょう。
+
+<div class="paragraph"> </div>
+
+最初のゴールは reflexivity で証明できます。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+証明項: <tt>(fun a : nat =&gt; nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl ?Goal a)</tt>
+<div class="paragraph"> </div>
+
+induction による証明項と同じ証明項を作るには、
+つぎのゴールに関数抽象を作る必要があります。
+これは intros で可能ですが、ひとつ問題なのは前提にすでに a が存在するため、
+intro a がエラーになることです。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">intro</span> <span class="id" title="var">a</span>.<br/>
+</div>
+
+<div class="doc">
+そこで、まず前提の a を消去します。
+これには clear を使います。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+証明項: <tt>(fun a : nat =&gt; nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) eq_refl ?Goal a)</tt>
+<div class="paragraph"> </div>
+
+clear が前提から消去するのは、束縛された変数を前提としてアクセスできなくするというだけで、
+証明項は変わりません。
+
+<div class="paragraph"> </div>
+
+これで前提が空になったので、intros a IHa として関数抽象を2段階構築します。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span> <span class="id" title="var">IHa</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+<pre>(fun a : nat =&gt;
+ nat_ind (fun a0 : nat =&gt; a0 + 0 = a0) (@eq_refl nat 0)
+   (fun (a0 : nat) (IHa : a0 + 0 = a0) =&gt; ?Goal@{a:=a0}) a)</pre>
+
+<div class="paragraph"> </div>
+
+これで、induction a 相当の証明項を構築できました。
+あとは前と同じように証明します。
+
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHa</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+apply nat_ind とだけ指定した場合にどうなるかみてみましょう。
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+ゴール1: <tt>a + 0 = 0</tt>
+<div class="paragraph"> </div>
+
+ゴール2: <tt>forall n : nat, a + 0 = n -&gt; a + 0 = S n</tt>
+<div class="paragraph"> </div>
+
+証明項: <tt>(fun a : nat =&gt; nat_ind (@eq nat (a + 0)) ?Goal ?Goal0 a)</tt>
+<div class="paragraph"> </div>
+
+ゴール1をみるとこれは証明できなくて、なにか間違えたことがわかります。
+
+<div class="paragraph"> </div>
+
+証明項をみると、第1引数には (@eq nat (a + 0)) が渡されています。
+eq の型をみてみましょう。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a>.<br/>
+</div>
+
+<div class="doc">
+<pre>
+eq : forall A : Type, A -&gt; A -&gt; Prop
+</pre>
+
+<div class="paragraph"> </div>
+
+最初の Type 型引数 A に nat が渡されており、つぎの A (つまり nat) 型引数に a + 0 が
+渡されています。
+最後の A (つまり nat) 型引数は渡されていないので、
+結局、(@eq nat (a + 0)) は nat を受け取って Prop を返す関数となります。
+これは nat_ind の第1引数の型とあっていますが、期待した引数ではありません。
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Abort</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
