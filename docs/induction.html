@@ -156,7 +156,7 @@ forall (P : forall _ : nat, Prop)
 
 <div class="paragraph"> </div>
 
-直感的には、nat_ind は、第2引数から始めて n 回第3引数を適用したものを返すと
+直感的には、nat_ind は、第2引数から始めて第3引数を n 回適用したものを返すと
 理解すればよさそうです。
 
 <div class="paragraph"> </div>
@@ -448,7 +448,7 @@ apply nat_ind とだけ指定した場合にどうなるかみてみましょう
 
 <div class="paragraph"> </div>
 
-証明項をみると、第1引数には (@eq nat (a + 0)) が渡されています。
+証明項をみると、第1引数P には (@eq nat (a + 0)) が渡されています。
 eq の型をみてみましょう。
 
 </div>
@@ -468,6 +468,11 @@ eq : forall A : Type, A -&gt; A -&gt; Prop
 最後の A (つまり nat) 型引数は渡されていないので、
 結局、(@eq nat (a + 0)) は nat を受け取って Prop を返す関数となります。
 これは nat_ind の第1引数の型とあっていますが、期待した引数ではありません。
+
+<div class="paragraph"> </div>
+
+induction は induction a というように引数を指定するので、
+その引数を利用して期待した P を作ってくれるのでしょう。
 
 </div>
 <div class="code">

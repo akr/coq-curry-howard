@@ -46,7 +46,7 @@ Coq はカリーハワード対応を利用して
   - % destruct % # <a href="destruct.html">destruct</a> #
   - % case % # <a href="ssr_case.html">case</a> # (SSReflect)
 - 数学的帰納法を適用する
-  - induction
+  - % induction % # <a href="induction.html">induction</a> #
   - elim (SSReflect)
 - f_equal
   congr (SSReflect)

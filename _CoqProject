@@ -15,3 +15,4 @@ theories/rewrite.v
 theories/ssr_rewrite.v
 theories/destruct.v
 theories/ssr_case.v
+theories/induction.v
