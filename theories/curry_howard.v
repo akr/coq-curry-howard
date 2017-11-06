@@ -45,6 +45,8 @@ Coq はカリーハワード対応を利用して
 - match 式を構築する
   - % destruct % # <a href="destruct.html">destruct</a> #
   - % case % # <a href="ssr_case.html">case</a> # (SSReflect)
+- simpl change unfold fold pattern
+- clear rename move_after
 - 数学的帰納法を適用する
   - % induction % # <a href="induction.html">induction</a> #
   - elim (SSReflect)
@@ -54,17 +56,14 @@ Coq はカリーハワード対応を利用して
   have (SSReflect)
 - wlog (SSReflect)
   suff (SSReflect)
-- pose set unlock
-- unfold fold cutrewrite
+- replace
+- unlock
 - injection case_eq
 - refine
-- simpl
-- clear
 - now
 - discriminate
 - assumption
 - contradiction
-- pattern
 
 *)
 
