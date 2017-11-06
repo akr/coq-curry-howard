@@ -148,6 +148,12 @@ Coq はここで、この型が @eq nat (2 + 4) (5 + 1) 型と等しいかどう
 そのため、Coq は @eq nat 6 6 型と @eq nat (2 + 4) (5 + 1) 型が等しいことを確認でき、
 erefl 6 が @eq nat (2 + 4) (5 + 1) 型の要素であることを判断できます。
 
+この、「計算を進めて同じ項になる」ようなものを convertible といいます。
+正確な定義は
+% Coq Reference Manual, 4.3 Conversion rules %
+# <a href="https://coq.inria.fr/refman/cic.html&#35;conv-rules">Coq Reference Manual, 4.3 Conversion rules</a> #
+に書いてあります。
+
 *)
 
 (**
