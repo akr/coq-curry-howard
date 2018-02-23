@@ -1,4 +1,4 @@
-(** * カリーハワード対応とCoqのあいだ
+(** * カリーハワード対応とCoqのあいだ - Show Proof で学ぶ Coq のしくみ -
 
 Coq はカリーハワード対応を利用して
 証明をプログラムによって表現しているというのはよく知られています。
@@ -24,6 +24,7 @@ Coq はカリーハワード対応を利用して
   - % auto % # <a href="auto.html">auto</a> #
 - 証明項を直接指定する
   - % exact % # <a href="exact.html">exact</a> #
+  - refine
 - 関数抽象を構築する
   - % intro % # <a href="intro.html">intro</a> #
   - % move=> % # <a href="ssr_intro.html">move=&gt;</a> # (SSReflect)
@@ -59,7 +60,6 @@ Coq はカリーハワード対応を利用して
 - replace
 - unlock
 - injection case_eq
-- refine
 - now
 - discriminate
 - assumption
