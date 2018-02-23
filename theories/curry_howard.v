@@ -64,6 +64,7 @@ Coq はカリーハワード対応を利用して
 - discriminate
 - assumption
 - contradiction
+- inversion
 
 *)
 
