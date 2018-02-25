@@ -65,6 +65,7 @@ Coq はカリーハワード対応を利用して
 - assumption
 - contradiction
 - inversion
+- subst
 
 *)
 
