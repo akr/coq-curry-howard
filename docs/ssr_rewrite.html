@@ -49,7 +49,7 @@ X = Y は eq X Y の notation なので、ここからは = のことを eq と�
 <span class="id" title="keyword">Section</span> <a name="Rewrite"><span class="id" title="section">Rewrite</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Variable</span> <a name="Rewrite.a"><span class="id" title="variable">a</span></a> <a name="Rewrite.b"><span class="id" title="variable">b</span></a> <a name="Rewrite.c"><span class="id" title="variable">c</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a name="Rewrite.a"><span class="id" title="variable">a</span></a> <a name="Rewrite.b"><span class="id" title="variable">b</span></a> <a name="Rewrite.c"><span class="id" title="variable">c</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 
 <br/>
 </div>
@@ -64,7 +64,7 @@ X = Y は eq X Y の notation なので、ここからは = のことを eq と�
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="ssr_rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">×</span> <span class="id" title="notation">(</span><a class="idref" href="ssr_rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a> <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a><span class="id" title="notation">)</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="ssr_rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">×</span> <span class="id" title="notation">(</span><a class="idref" href="ssr_rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a> <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a><span class="id" title="notation">)</span>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="ssr_rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">×</span> <span class="id" title="notation">(</span><a class="idref" href="ssr_rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a> <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a><span class="id" title="notation">)</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="ssr_rewrite.html#Rewrite.a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">×</span> <span class="id" title="notation">(</span><a class="idref" href="ssr_rewrite.html#Rewrite.c"><span class="id" title="variable">c</span></a> <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#Rewrite.b"><span class="id" title="variable">b</span></a><span class="id" title="notation">)</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
@@ -132,7 +132,7 @@ eq_ind_r がどんな定理なのか About で表示してみましょう。
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq_ind_r"><span class="id" title="definition">eq_ind_r</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq_ind_r"><span class="id" title="definition">eq_ind_r</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -285,7 +285,7 @@ reflexivity で erefl (a * (c + b)) という証明項が構築されている�
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ <a class="idref" href="ssr_rewrite.html#a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">+</span> 2<a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ 2 <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ <a class="idref" href="ssr_rewrite.html#a"><span class="id" title="variable">a</span></a> <span class="id" title="notation">+</span> 2<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ 2 <span class="id" title="notation">+</span> <a class="idref" href="ssr_rewrite.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">Fail</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">addnC</span>.<br/>
 </div>

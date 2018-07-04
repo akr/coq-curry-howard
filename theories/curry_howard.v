@@ -38,6 +38,7 @@ Coq はカリーハワード対応を利用して
 - let 式を構築する
   - % pose, set % # <a href="set.html">pose, set</a> #
   - % specialize % # <a href="specialize.html">specialize</a> #
+  - have @var (SSReflect)
 - eq_refl で等式を証明する
   - % reflexivity % # <a href="reflexivity.html">reflexivity</a> #
 - eq_ind_r で等式による書き換えを行う

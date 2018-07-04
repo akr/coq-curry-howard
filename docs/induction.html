@@ -45,7 +45,7 @@ induction が構築する証明項をみるために、a + 0 = a を証明して
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
 </div>
@@ -106,7 +106,7 @@ nat_ind がどんな関数なのか About でみてみましょう。
 
 </div>
 <div class="code">
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -318,7 +318,7 @@ induction が nat_ind を呼び出す関数呼び出しを構築することが�
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
 </div>
@@ -331,7 +331,7 @@ induction a とするかわりに、(nat_ind (fun a0 : nat =&gt; a0 + 0 = a0)) �
 
 </div>
 <div class="code">
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">a0</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">a0</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a0"><span class="id" title="variable">a0</span></a>)).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -427,10 +427,10 @@ apply nat_ind とだけ指定した場合にどうなるかみてみましょう
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="induction.html#a"><span class="id" title="variable">a</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">a</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#nat_ind"><span class="id" title="definition">nat_ind</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Show</span> <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -453,7 +453,7 @@ eq の型をみてみましょう。
 
 </div>
 <div class="code">
-<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.7.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a>.<br/>
+<span class="id" title="keyword">About</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a>.<br/>
 </div>
 
 <div class="doc">
